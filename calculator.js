@@ -141,7 +141,7 @@
       description: 'Exceptionally quiet operation. A great balance of CADR and noise levels for primary bedrooms.',
       bestFor: 'Primary bedrooms requiring quiet operation',
       strengths: ['Exceptionally quiet on low settings', 'Washable fabric pre-filter looks great and catches hair', 'Energy Star rated'],
-      tradeoff: 'Uses HEPASilent technology (mechanical + electrostatic), which isn\'t traditional True HEPA and produces trace ozone.',
+      tradeoff: 'Uses HEPASilent technology (mechanical + electrostatic), which isn\'t traditional True HEPA and produces trace ozone well below EPA safety thresholds — those with severe ozone sensitivity may prefer purely mechanical HEPA.',
       concernFit: {
         allergies: 'Selected because its HEPASilent tech captures allergens efficiently while remaining whisper-quiet for sleep.',
         smoke: 'Selected because it cycles room air quickly, though true mechanical HEPA is sometimes preferred for heavy smoke.',
@@ -332,7 +332,7 @@
       return;
     }
 
-    let hasCalculated = false;
+    let hasCalculated = true;
 
     function resetResults() {
       if (cadrEl) cadrEl.textContent = '—';
@@ -523,6 +523,7 @@
 
     updateAchVisuals();
     resetResults();
+    compute();
     
     console.info('Room Air Sizer calculator initialized.');
   }

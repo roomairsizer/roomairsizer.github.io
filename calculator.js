@@ -339,11 +339,11 @@
       if (volumeEl) volumeEl.textContent = '— ft³';
       if (areaEl) areaEl.textContent = '— ft²';
       if (cfmEl) cfmEl.textContent = '—';
-      if (recEl) recEl.textContent = 'Enter your room dimensions, then click the button to get your recommendation.';
+      if (recEl) recEl.textContent = 'Enter your room dimensions and click the button to see your tailored recommendation.';
       const grid = document.querySelector('.picks__grid');
       if (grid) grid.innerHTML = '';
       const note = document.querySelector('.picks__note');
-      if (note) note.textContent = '';
+      if (note) note.textContent = 'Recommendations will appear here once you calculate your room\'s requirements.';
     }
 
     function compute() {
@@ -455,27 +455,39 @@
 
           return `
             <article class="pick pick--authority">
-              <p class="pick__tag">${tag}</p>
-              <h4 class="pick__name">${product.name}</h4>
-              <p class="pick__meta">CADR: ${product.cadr} &nbsp;|&nbsp; Price: ${product.priceTier} &nbsp;|&nbsp; <span class="pick__status">${status}</span></p>
+              <header class="pick__header">
+                <p class="pick__tag" data-rank="${tag.toLowerCase().replace(' ', '-')}">${tag}</p>
+                <h4 class="pick__name">${product.name}</h4>
+                <div class="pick__stats">
+                  <span class="stat"><span class="stat__label">CADR</span> ${product.cadr}</span>
+                  <span class="stat-divider"></span>
+                  <span class="stat"><span class="stat__label">Price</span> ${product.priceTier}</span>
+                  <span class="stat-divider"></span>
+                  <span class="stat stat--status">${status}</span>
+                </div>
+              </header>
               
               <div class="pick__why">
                 <strong>Why this matched your room</strong>
                 <p>${whyCopy}</p>
               </div>
 
-              <p class="pick__best"><strong>Best for:</strong> ${product.bestFor || 'General use'}</p>
+              <div class="pick__body">
+                <p class="pick__best"><strong>Best for:</strong> ${product.bestFor || 'General use'}</p>
 
-              <ul class="pick__strengths">
-                ${strengthsHtml}
-              </ul>
+                <ul class="pick__strengths">
+                  ${strengthsHtml}
+                </ul>
+              </div>
 
               <div class="pick__tradeoff">
                 <strong>Know before buying</strong>
                 <p>${product.tradeoff || 'No major tradeoffs.'}</p>
               </div>
 
-              <a class="btn btn--secondary" href="${link}" target="_blank" rel="noopener sponsored nofollow" aria-label="View ${product.name} on Amazon">View on Amazon</a>
+              <div class="pick__action">
+                <a class="btn btn--amazon" href="${link}" target="_blank" rel="noopener sponsored nofollow" aria-label="View ${product.name} on Amazon">Check Price on Amazon <span aria-hidden="true">→</span></a>
+              </div>
             </article>
           `;
         }).join('');

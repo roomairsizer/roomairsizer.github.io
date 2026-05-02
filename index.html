@@ -5,20 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0a0e1a">
 
-  <title>Air Purifier Sizer — The Battle for Better Air</title>
-  <meta name="description" content="Find out what size air purifier you need. Our free CADR calculator sizes purifiers to your room dimensions, ceiling height, and air-quality concerns.">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LR0XH9QTFF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LR0XH9QTFF');
+  </script>
+
+  <!-- Google Search Console verification tag can be added here -->
+
+  <title>Air Purifier Sizer & Room CADR Calculator — Better Air</title>
+  <meta name="description" content="Free CADR calculator to determine the right air purifier size based on room volume, ceiling height, and air changes per hour for smoke, allergies, or dust.">
 
   <link rel="canonical" href="https://roomairsizer.github.io/">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Battle for Better Air">
-  <meta property="og:title" content="Air Purifier Sizer — The Battle for Better Air">
+  <meta property="og:title" content="Air Purifier Sizer & Room CADR Calculator — Better Air">
   <meta property="og:description" content="Independent tools and reviews to help you choose the right purifier, dehumidifier, or humidifier — sized to your space, your air, and your priorities.">
   <meta property="og:url" content="https://roomairsizer.github.io/">
   <meta property="og:image" content="https://roomairsizer.github.io/assets/hero-poster.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Air Purifier Sizer — The Battle for Better Air">
-  <meta name="twitter:description" content="Independent tools and reviews to help you choose the right purifier, dehumidifier, or humidifier.">
+  <meta name="twitter:title" content="Air Purifier Sizer & Room CADR Calculator — Better Air">
+  <meta name="twitter:description" content="Independent tools and reviews to help you choose the right purifier.">
   <meta name="twitter:image" content="https://roomairsizer.github.io/assets/hero-poster.jpg">
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -26,26 +38,108 @@
   <link rel="preload" as="image" href="assets/hero-poster.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
 
   <link rel="stylesheet" href="styles.css">
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Air Purifier Sizer",
-    "url": "https://roomairsizer.github.io/",
-    "description": "Free calculator that sizes an air purifier to your room volume, ceiling height, target air changes per hour, and primary air-quality concern.",
-    "applicationCategory": "UtilitiesApplication",
-    "operatingSystem": "Any (web browser)",
-    "browserRequirements": "Requires JavaScript",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "publisher": {
-      "@type": "Organization",
-      "name": "The Battle for Better Air",
-      "url": "https://roomairsizer.github.io/"
-    }
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "name": "The Battle for Better Air",
+        "url": "https://roomairsizer.github.io/",
+        "description": "Independent air purifier sizing tools and buying guidance for cleaner indoor air."
+      },
+      {
+        "@type": "Organization",
+        "name": "The Battle for Better Air",
+        "url": "https://roomairsizer.github.io/"
+      },
+      {
+        "@type": "WebApplication",
+        "name": "Air Purifier Sizer",
+        "url": "https://roomairsizer.github.io/",
+        "description": "A free CADR calculator that estimates the air purifier clean air delivery rate needed for a room based on dimensions, ceiling height, air changes per hour, and air quality concern.",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What CADR do I need for a bedroom?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For a standard 12x14 bedroom with an 8-foot ceiling running at 4 air changes per hour (ACH), you need a minimum CADR of 139. If you have allergies, pets, or asthma, you may want to size up to 5 or 6 ACH, which increases the required CADR."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is CADR more useful than the square-footage number on the box?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Square-footage ratings on air purifier boxes are often based on best-case scenarios with low ceilings and minimal air changes. CADR (Clean Air Delivery Rate) is the independently verified measurement of how much filtered air the unit actually delivers per minute."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How many air changes per hour should I use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "4 ACH (Air Changes per Hour) is the standard recommendation for general air cleaning. If you have allergies, 5 ACH is recommended. For asthma or wildfire smoke, 6 to 8 ACH is preferred to keep the air clean."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What size air purifier do I need for wildfire smoke?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Wildfire smoke requires a high CADR for smoke particles, plus activated carbon for the smoke odor. You should calculate for 6 to 8 air changes per hour to ensure the purifier can keep up with heavy particulate loads."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I buy one large purifier or smaller room-based purifiers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It is generally better to use smaller, right-sized purifiers in the individual rooms where you spend the most time (like the bedroom or living room). Closed doors and hallways block airflow, making single whole-house units less effective."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do air purifiers remove VOCs and odors?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "HEPA filters do not remove VOCs (Volatile Organic Compounds) or odors. To remove gases and smells, the air purifier needs a substantial activated carbon filter. A thin carbon sheet is rarely enough for heavy odors."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does ceiling height matter?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Air purifiers clean a three-dimensional volume of air, not a two-dimensional floor area. A room with 10-foot ceilings has 25% more air to clean than the same room with standard 8-foot ceilings, requiring a higher CADR."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does the calculator multiply by 1.55?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The calculator determines the necessary CFM (Cubic Feet per Minute) to achieve your target air changes, and then applies a 1.55x buffer. This ensures the purifier can meet your needs while running on a quieter medium speed, rather than maxing out on a loud, high setting."
+            }
+          }
+        ]
+      }
+    ]
   }
   </script>
 
@@ -75,9 +169,11 @@
   <div class="container nav__inner">
     <a class="nav__brand" href="/" aria-label="The Battle for Better Air — home">The&nbsp;Battle&nbsp;for&nbsp;Better&nbsp;Air</a>
     <nav class="nav__links" aria-label="Primary">
-      <a href="#calculator">Calculators</a>
-      <a href="#">Buying Guides</a>
-      <a href="#">About</a>
+      <a href="/#calculator">Calculator</a>
+      <a href="guides.html">Guides</a>
+      <a href="air-purifier-sizing-guide.html">Sizing Guide</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </div>
 </header>
@@ -103,11 +199,21 @@
   </section>
 
   <section id="thesis" class="thesis" aria-label="Why indoor air matters">
-    <div class="prose">
-      <p class="thesis__lede">
-        The air inside your home is, on average, two to five times more polluted than the air outside it. Pollen drifts in through screen doors. Dust mites colonize bedding. Pet dander, cooking particulates, mold spores, off-gassing from furniture — all of it accumulates in the rooms where you live, sleep, and breathe. The right air purifier, sized to the right room, is the most cost-effective intervention you can make. The wrong one is an expensive paperweight. We&rsquo;re here to help you tell the difference.
-      </p>
-      <hr class="thesis__rule">
+    <div class="container thesis__grid">
+      <div class="thesis__content">
+        <p class="eyebrow thesis__eyebrow">Why room sizing matters</p>
+        <p class="thesis__lede">
+          <strong>The air inside your home is, on average, two to five times more polluted than the air outside it.</strong> Pollen drifts in through screen doors. Dust mites colonize bedding. Pet dander, cooking particulates, mold spores, off-gassing from furniture — all of it accumulates in the rooms where you live, sleep, and breathe.
+        </p>
+        <p class="thesis__lede">
+          The right air purifier, sized to the right room, is the most cost-effective intervention you can make. The wrong one is an expensive paperweight. We&rsquo;re here to help you tell the difference.
+        </p>
+      </div>
+      
+      <figure class="editorial-image">
+        <img src="images/room-scene-editorial.png" alt="Modern bedroom with an air purifier placed near the bed for cleaner indoor air." decoding="async">
+        <figcaption>Start with the room where you breathe the longest. For most homes, that means the bedroom.</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -115,7 +221,7 @@
     <div class="container">
       <p class="eyebrow">Tool 01</p>
       <h2 id="calc-title" class="calc__title">Air Purifier Sizer</h2>
-      <p class="calc__lede">Tell us about your room. We&rsquo;ll tell you the CADR rating you need, why, and which products meet it.</p>
+      <p class="calc__lede">Tell us about your room. We&rsquo;ll tell you the exact CADR rating you need, why, and which products meet it.</p>
 
       <div class="calc__card">
         <form class="calc__form" id="sizer-form" autocomplete="off" novalidate>
@@ -164,25 +270,29 @@
         </form>
 
         <aside class="calc__results" id="results" aria-live="polite" aria-atomic="true">
-          <p class="results__label">Required CADR (smoke)</p>
-          <p class="results__value" id="cadr">—</p>
+          <div class="results__primary">
+            <p class="results__label">Required CADR (smoke)</p>
+            <p class="results__value" id="cadr">—</p>
+          </div>
 
           <dl class="results__meta">
             <div>
-              <dt>Room volume</dt>
+              <dt>Volume</dt>
               <dd id="volume">— ft³</dd>
             </div>
             <div>
-              <dt>Floor area</dt>
+              <dt>Area</dt>
               <dd id="area">— ft²</dd>
             </div>
             <div>
-              <dt>Required CFM</dt>
+              <dt>Req. CFM</dt>
               <dd id="cfm">—</dd>
             </div>
           </dl>
 
-          <p class="results__copy" id="recommendation">Enter your room dimensions to get a recommendation.</p>
+          <div class="results__explanation">
+            <p class="results__copy" id="recommendation">Enter your room dimensions and click the button to see your tailored recommendation.</p>
+          </div>
         </aside>
       </div>
 
@@ -192,7 +302,7 @@
 
       <div class="picks">
         <h3 class="picks__title">Recommended for your room</h3>
-        <p class="picks__note">Based on your dimensions and primary concern, here are the top picks for your space.</p>
+        <p class="picks__note" id="picks-note">Recommendations will appear here once you calculate your room's requirements.</p>
         <div class="picks__grid">
           <!-- Dynamic recommendations will be injected here by JS -->
         </div>
@@ -202,7 +312,16 @@
 
   <section class="why" aria-labelledby="why-title">
     <div class="container">
-      <h2 id="why-title" class="why__title">Why this matters</h2>
+      <header class="why__header prose">
+        <h2 id="why-title" class="why__title">Why Room Sizing Matters</h2>
+        <p class="why__lede">Buying an air purifier based on the "square footage" printed on the box is a mistake. Here's how to properly size a unit for your actual space.</p>
+      </header>
+      
+      <figure class="explainer-image">
+        <img src="images/cadr-airflow-explainer.png" alt="Cutaway room illustration showing airflow circulation from an air purifier." loading="lazy" decoding="async">
+        <figcaption>CADR is about moving enough clean air through the actual room — not guessing from marketing square footage.</figcaption>
+      </figure>
+
       <div class="why__grid">
 
         <article class="why__card">
@@ -211,7 +330,7 @@
             <circle cx="20" cy="20" r="14"/>
           </svg>
           <h3>CADR is the only number that matters</h3>
-          <p>Square-footage ratings on purifier boxes are marketing. CADR — Clean Air Delivery Rate — is the AHAM-verified measurement of how much filtered air a unit actually delivers per minute. If a product doesn&rsquo;t publish a CADR, walk away.</p>
+          <p>Square-footage ratings on purifier boxes are often exaggerated marketing. <strong>CADR (Clean Air Delivery Rate)</strong> is the independently verified measurement of how much filtered air a unit actually delivers per minute. If a product doesn&rsquo;t publish a CADR, don't buy it.</p>
         </article>
 
         <article class="why__card">
@@ -219,8 +338,8 @@
             <rect x="6" y="6" width="28" height="28" rx="2"/>
             <path d="M14 20l4 4 8-8"/>
           </svg>
-          <h3>Bigger isn&rsquo;t better</h3>
-          <p>An oversized purifier costs more upfront, runs louder, eats more electricity, and burns through filters faster. A right-sized unit running on medium beats a giant unit running on low — every time.</p>
+          <h3>Bigger isn&rsquo;t automatically better</h3>
+          <p>An oversized purifier costs more upfront, runs louder on low settings, eats more electricity, and burns through expensive replacement filters faster. A right-sized unit running efficiently on a medium setting beats a giant unit running on low.</p>
         </article>
 
         <article class="why__card">
@@ -229,9 +348,85 @@
             <path d="M16 32v-8h8v8"/>
           </svg>
           <h3>Every room has its own air</h3>
-          <p>A single &ldquo;whole-house&rdquo; purifier is a marketing fiction. Closed doors, hallway turns, and HVAC currents fragment indoor air. Put a purifier in the room you actually breathe in — bedroom first.</p>
+          <p>A single &ldquo;whole-house&rdquo; purifier is a marketing fiction. Closed doors, hallway turns, and HVAC currents fragment indoor air. You need to put the purifier in the room you actually breathe in — prioritizing the bedroom first.</p>
         </article>
 
+      </div>
+      
+      <figure class="explainer-image strategy-image">
+        <img src="images/bedroom-first-strategy.png" alt="Modern home cutaway showing a bedroom-focused air purifier strategy." loading="lazy" decoding="async">
+        <figcaption>Closed doors, hallway turns, and room layouts change air movement. Size the purifier for the room you actually use.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="guide-sections" aria-label="Sizing Guides and FAQs">
+    <div class="container">
+      <div class="prose">
+        <h2>How to use the Air Purifier Sizer</h2>
+        <p>Using the air purifier size calculator is straightforward:</p>
+        <ul>
+          <li><strong>Enter your dimensions:</strong> Input your room length, width, and ceiling height to find your total volume.</li>
+          <li><strong>Choose your main concern:</strong> Select what you are trying to filter (allergies, smoke, pets, dust, VOCs, or asthma).</li>
+          <li><strong>Adjust the ACH:</strong> The calculator defaults to the recommended Air Changes per Hour based on your concern, but you can adjust it.</li>
+          <li><strong>Check the Required CADR:</strong> Use this number as your absolute minimum target when shopping.</li>
+        </ul>
+
+        <h2>Common room sizing examples</h2>
+        <p>Here are a few quick benchmarks for standard rooms:</p>
+        <ul>
+          <li><strong>Small bedroom (10×10, 8ft ceiling):</strong> Volume is 800 ft³. At 4 ACH, you need a minimum CADR of 83.</li>
+          <li><strong>Primary bedroom (14×16, 8ft ceiling):</strong> Volume is 1,792 ft³. At 4 ACH, you need a minimum CADR of 185.</li>
+          <li><strong>Large living room (20×20, 9ft ceiling):</strong> Volume is 3,600 ft³. At 4 ACH, you need a minimum CADR of 372 (or two smaller units with 186 CADR each).</li>
+          <li><strong>Wildfire smoke room (12×14, 8ft ceiling):</strong> Because smoke requires at least 6 ACH, the required CADR jumps to 208.</li>
+        </ul>
+
+        <h2>CADR by concern</h2>
+        <p>Your primary air quality concern dictates how often you need to cycle the air (ACH) and what type of filter you need:</p>
+        <ul>
+          <li><strong>Allergies:</strong> Target 5 ACH. A True HEPA filter is required to capture fine pollen and dust mites.</li>
+          <li><strong>Smoke / wildfire:</strong> Target 6–8 ACH. You need True HEPA for the ash particles, plus a heavy activated carbon filter to absorb the smoke odor and gases.</li>
+          <li><strong>Pets:</strong> Target 4–5 ACH. HEPA handles the dander, but if you want to eliminate pet smells, look for a unit with a carbon pellet filter.</li>
+          <li><strong>General dust:</strong> Target 4 ACH. Most standard HEPA air purifiers will perform perfectly.</li>
+          <li><strong>VOCs / odors:</strong> Target 4 ACH. Remember that HEPA filters <em>do not</em> capture gases. You must prioritize purifiers with pounds of activated carbon, not just thin carbon sheets.</li>
+          <li><strong>Asthma-sensitive spaces:</strong> People with asthma-sensitive spaces often prefer higher air-change rates (6–8 ACH) and reliable particle filtration. <em>Note: Always discuss medical concerns with a qualified professional.</em></li>
+        </ul>
+
+        <h2 id="faq">Frequently Asked Questions</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>What CADR do I need for a bedroom?</summary>
+            <p>For a standard 12x14 bedroom with an 8-foot ceiling running at 4 air changes per hour (ACH), you need a minimum CADR of 139. If you have allergies, pets, or asthma, you may want to size up to 5 or 6 ACH, which increases the required CADR.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Is CADR more useful than the square-footage number on the box?</summary>
+            <p>Yes. Square-footage ratings on air purifier boxes are often based on best-case scenarios with low ceilings and minimal air changes. CADR (Clean Air Delivery Rate) is the independently verified measurement of how much filtered air the unit actually delivers per minute.</p>
+          </details>
+          <details class="faq-item">
+            <summary>How many air changes per hour should I use?</summary>
+            <p>4 ACH (Air Changes per Hour) is the standard recommendation for general air cleaning. If you have allergies, 5 ACH is recommended. For asthma or wildfire smoke, 6 to 8 ACH is preferred to keep the air clean.</p>
+          </details>
+          <details class="faq-item">
+            <summary>What size air purifier do I need for wildfire smoke?</summary>
+            <p>Wildfire smoke requires a high CADR for smoke particles, plus activated carbon for the smoke odor. You should calculate for 6 to 8 air changes per hour to ensure the purifier can keep up with heavy particulate loads.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Should I buy one large purifier or smaller room-based purifiers?</summary>
+            <p>It is generally better to use smaller, right-sized purifiers in the individual rooms where you spend the most time (like the bedroom or living room). Closed doors and hallways block airflow, making single whole-house units less effective.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Do air purifiers remove VOCs and odors?</summary>
+            <p>HEPA filters do not remove VOCs (Volatile Organic Compounds) or odors. To remove gases and smells, the air purifier needs a substantial activated carbon filter. A thin carbon sheet is rarely enough for heavy odors.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Why does ceiling height matter?</summary>
+            <p>Air purifiers clean a three-dimensional volume of air, not a two-dimensional floor area. A room with 10-foot ceilings has 25% more air to clean than the same room with standard 8-foot ceilings, requiring a higher CADR.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Why does the calculator multiply by 1.55?</summary>
+            <p>The calculator determines the necessary CFM (Cubic Feet per Minute) to achieve your target air changes, and then applies a 1.55x buffer. This ensures the purifier can meet your needs while running on a quieter medium speed, rather than maxing out on a loud, high setting.</p>
+          </details>
+        </div>
       </div>
     </div>
   </section>
@@ -252,8 +447,18 @@
 
 <footer class="footer" role="contentinfo">
   <div class="container footer__inner">
+    <nav class="footer__nav" aria-label="Footer Navigation">
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+      <a href="guides.html">Guides</a>
+      <a href="air-purifier-sizing-guide.html">Sizing Guide</a>
+      <a href="bedroom-air-purifier-guide.html">Bedroom Guide</a>
+      <a href="basement-air-purifier-guide.html">Basement Guide</a>
+      <a href="air-purifier-for-smoke.html">Smoke Guide</a>
+      <a href="air-purifier-for-allergies.html">Allergy Guide</a>
+    </nav>
     <p class="footer__brand">The Battle for Better Air — Independent reviews and tools for cleaner indoor air.</p>
-    <p class="footer__disclosure">We earn a commission from products purchased through our links at no extra cost to you. Our recommendations are based on independent research and testing standards, not commission rates.</p>
+    <p class="footer__disclosure">We may earn a commission from products purchased through links on this site, at no extra cost to you. Product availability, pricing, and specifications can change. Always confirm current details on Amazon before buying.</p>
     <p class="footer__copy">&copy; 2026 The Battle for Better Air. All rights reserved.</p>
   </div>
 </footer>

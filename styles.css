@@ -610,6 +610,64 @@ output {
 .pick__copy { color: var(--text-dim); font-size: 0.9375rem; margin: 0 0 0.5rem; flex-grow: 1; }
 .pick .btn { align-self: flex-start; padding: 0.7em 1.25em; font-size: 0.9rem; }
 
+.pick--authority { display: flex; flex-direction: column; height: 100%; }
+.pick__status { font-weight: 500; color: var(--accent); }
+.pick__why {
+  background: rgba(125,211,252,0.05);
+  border: 1px solid rgba(125,211,252,0.15);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+.pick__why strong {
+  display: block;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.pick__why p {
+  margin: 0;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+.pick__best {
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+.pick__best strong {
+  color: var(--text);
+}
+.pick__strengths {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+.pick__strengths li {
+  margin-bottom: 0.3rem;
+}
+.pick__tradeoff {
+  margin-top: auto;
+  margin-bottom: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--border);
+  font-size: 0.85rem;
+}
+.pick__tradeoff strong {
+  display: block;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.pick__tradeoff p {
+  margin: 0;
+  color: var(--text-dim);
+}
+
 /* Why this matters ------------------------------------------------------ */
 .why {
   padding: clamp(4rem, 8vw, 7rem) 0;

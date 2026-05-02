@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0e1a">
+
+  <title>Air Purifier Sizer — The Battle for Better Air</title>
+  <meta name="description" content="Find out what size air purifier you need. Our free CADR calculator sizes purifiers to your room dimensions, ceiling height, and air-quality concerns.">
+
+  <link rel="canonical" href="https://roomairsizer.github.io/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Battle for Better Air">
+  <meta property="og:title" content="Air Purifier Sizer — The Battle for Better Air">
+  <meta property="og:description" content="Independent tools and reviews to help you choose the right purifier, dehumidifier, or humidifier — sized to your space, your air, and your priorities.">
+  <meta property="og:url" content="https://roomairsizer.github.io/">
+  <meta property="og:image" content="https://roomairsizer.github.io/assets/hero-poster.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Air Purifier Sizer — The Battle for Better Air">
+  <meta name="twitter:description" content="Independent tools and reviews to help you choose the right purifier, dehumidifier, or humidifier.">
+  <meta name="twitter:image" content="https://roomairsizer.github.io/assets/hero-poster.jpg">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Air Purifier Sizer",
+    "url": "https://roomairsizer.github.io/",
+    "description": "Free calculator that sizes an air purifier to your room volume, ceiling height, target air changes per hour, and primary air-quality concern.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any (web browser)",
+    "browserRequirements": "Requires JavaScript",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "The Battle for Better Air",
+      "url": "https://roomairsizer.github.io/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to size an air purifier for a room",
+    "description": "Use room dimensions, target air changes per hour, and your primary air-quality concern to identify the minimum CADR rating an air purifier needs to be effective in a given room.",
+    "totalTime": "PT2M",
+    "step": [
+      { "@type": "HowToStep", "name": "Measure the room", "text": "Measure the length, width, and ceiling height of the room in feet." },
+      { "@type": "HowToStep", "name": "Pick a target air changes per hour", "text": "Use 4 ACH for general use, 5+ for allergies, and 6 to 8 for asthma or wildfire smoke." },
+      { "@type": "HowToStep", "name": "Calculate required CFM", "text": "Multiply room volume in cubic feet by ACH, then divide by 60 to get cubic feet per minute." },
+      { "@type": "HowToStep", "name": "Convert to CADR", "text": "Multiply CFM by 1.55 to estimate the smoke CADR rating the purifier needs." },
+      { "@type": "HowToStep", "name": "Match to a product", "text": "Choose a purifier whose AHAM-verified CADR meets or exceeds the calculated value for your primary concern." }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+<header class="nav" role="banner">
+  <div class="container nav__inner">
+    <a class="nav__brand" href="/" aria-label="The Battle for Better Air — home">The&nbsp;Battle&nbsp;for&nbsp;Better&nbsp;Air</a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#calculator">Calculators</a>
+      <a href="#">Buying Guides</a>
+      <a href="#">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" aria-label="Introduction">
+    <video class="hero__video" autoplay loop muted playsinline preload="metadata" poster="assets/hero-poster.jpg" aria-hidden="true">
+      <source src="assets/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero__overlay" aria-hidden="true"></div>
+    <div class="container hero__content">
+      <h1 class="hero__headline">
+        <span class="hero__headline-1">The Battle for Better Air</span>
+        <span class="hero__headline-2"><em>Begins in every room of your home.</em></span>
+      </h1>
+      <p class="hero__sub">Independent tools and reviews to help you choose the right purifier, dehumidifier, or humidifier — sized to your space, your air, and your priorities.</p>
+      <a class="btn btn--primary" href="#calculator">Find Your Size <span aria-hidden="true">→</span></a>
+    </div>
+    <a class="hero__scroll" href="#thesis" aria-label="Scroll to article">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </a>
+  </section>
+
+  <section id="thesis" class="thesis" aria-label="Why indoor air matters">
+    <div class="prose">
+      <p class="thesis__lede">
+        The air inside your home is, on average, two to five times more polluted than the air outside it. Pollen drifts in through screen doors. Dust mites colonize bedding. Pet dander, cooking particulates, mold spores, off-gassing from furniture — all of it accumulates in the rooms where you live, sleep, and breathe. The right air purifier, sized to the right room, is the most cost-effective intervention you can make. The wrong one is an expensive paperweight. We&rsquo;re here to help you tell the difference.
+      </p>
+      <hr class="thesis__rule">
+    </div>
+  </section>
+
+  <section id="calculator" class="calc" aria-labelledby="calc-title">
+    <div class="container">
+      <p class="eyebrow">Tool 01</p>
+      <h2 id="calc-title" class="calc__title">Air Purifier Sizer</h2>
+      <p class="calc__lede">Tell us about your room. We&rsquo;ll tell you the CADR rating you need, why, and which products meet it.</p>
+
+      <div class="calc__card">
+        <form class="calc__form" id="sizer-form" autocomplete="off" novalidate>
+          <div class="field">
+            <label for="length">Room length <span class="field__unit">(feet)</span></label>
+            <input id="length" name="length" type="number" min="2" max="60" step="0.5" value="12" inputmode="decimal" required>
+            <button type="button" class="field__help" aria-label="What does room length mean?" aria-expanded="false" data-tip="Measure the longer wall of the room, in feet. Most U.S. living-room walls are 10–18 ft.">?</button>
+          </div>
+
+          <div class="field">
+            <label for="width">Room width <span class="field__unit">(feet)</span></label>
+            <input id="width" name="width" type="number" min="2" max="60" step="0.5" value="14" inputmode="decimal" required>
+            <button type="button" class="field__help" aria-label="What does room width mean?" aria-expanded="false" data-tip="The shorter wall of the room, in feet. Together with length, this gives the floor area.">?</button>
+          </div>
+
+          <div class="field">
+            <label for="height">Ceiling height <span class="field__unit">(feet)</span></label>
+            <input id="height" name="height" type="number" min="6" max="20" step="0.5" value="8" inputmode="decimal" required>
+            <button type="button" class="field__help" aria-label="Why does ceiling height matter?" aria-expanded="false" data-tip="Standard ceilings are 8 ft. Older homes, lofts, and vaulted ceilings can be 9–14 ft. Taller ceilings = more air volume to clean.">?</button>
+          </div>
+
+          <div class="field field--full">
+            <label for="concern">Primary concern</label>
+            <select id="concern" name="concern" required>
+              <option value="allergies">Allergies (pollen, dust mites)</option>
+              <option value="smoke">Smoke or wildfire</option>
+              <option value="pets">Pet dander</option>
+              <option value="dust">General dust</option>
+              <option value="vocs">VOCs and odors</option>
+              <option value="asthma">Asthma</option>
+            </select>
+            <button type="button" class="field__help" aria-label="Why does primary concern matter?" aria-expanded="false" data-tip="Different pollutants need different filtration. Smoke and VOCs benefit from activated carbon; allergies and pet dander need True HEPA; asthma and wildfire smoke need both, plus higher air-change rates.">?</button>
+          </div>
+
+          <div class="field field--full">
+            <label for="ach">Air changes per hour: <output for="ach" id="ach-out">4</output></label>
+            <input id="ach" name="ach" type="range" min="2" max="8" step="0.5" value="4">
+            <p class="field__hint">4 ACH = standard. 5+ for allergies. 6–8 for asthma or wildfire smoke.</p>
+            <button type="button" class="field__help" aria-label="What is ACH?" aria-expanded="false" data-tip="Air Changes per Hour: how many times the purifier cycles all the air in the room per hour. Higher ACH = cleaner air, but louder operation and a more powerful (more expensive) machine.">?</button>
+          </div>
+        </form>
+
+        <aside class="calc__results" id="results" aria-live="polite" aria-atomic="true">
+          <p class="results__label">Required CADR (smoke)</p>
+          <p class="results__value" id="cadr">—</p>
+
+          <dl class="results__meta">
+            <div>
+              <dt>Room volume</dt>
+              <dd id="volume">— ft³</dd>
+            </div>
+            <div>
+              <dt>Floor area</dt>
+              <dd id="area">— ft²</dd>
+            </div>
+            <div>
+              <dt>Required CFM</dt>
+              <dd id="cfm">—</dd>
+            </div>
+          </dl>
+
+          <p class="results__copy" id="recommendation">Enter your room dimensions to get a recommendation.</p>
+        </aside>
+      </div>
+
+      <noscript>
+        <p class="noscript">This calculator needs JavaScript to update live. Without it, you can still use the formula manually: <strong>CADR ≈ (length × width × height × ACH ÷ 60) × 1.55</strong>.</p>
+      </noscript>
+
+      <div class="picks">
+        <h3 class="picks__title">Recommended for your room</h3>
+        <p class="picks__note">These are V1 placeholder slots. Tested recommendations and affiliate links land in V2.</p>
+        <div class="picks__grid">
+          <article class="pick">
+            <p class="pick__tag">Editor&rsquo;s Pick</p>
+            <h4 class="pick__name">Premium HEPA Purifier</h4>
+            <p class="pick__copy">Best-in-class CADR, true HEPA + activated carbon, quiet at sleep settings.</p>
+            <a class="btn btn--secondary" href="#" rel="noopener">View on Amazon</a>
+          </article>
+          <article class="pick">
+            <p class="pick__tag">Best Value</p>
+            <h4 class="pick__name">Compact HEPA Purifier</h4>
+            <p class="pick__copy">Right-sized for bedrooms and home offices under 350 ft². Honest filter costs.</p>
+            <a class="btn btn--secondary" href="#" rel="noopener">View on Amazon</a>
+          </article>
+          <article class="pick">
+            <p class="pick__tag">For Larger Rooms</p>
+            <h4 class="pick__name">High-CADR HEPA Purifier</h4>
+            <p class="pick__copy">Built for great rooms, open-plan layouts, and wildfire-smoke season.</p>
+            <a class="btn btn--secondary" href="#" rel="noopener">View on Amazon</a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why" aria-labelledby="why-title">
+    <div class="container">
+      <h2 id="why-title" class="why__title">Why this matters</h2>
+      <div class="why__grid">
+
+        <article class="why__card">
+          <svg class="why__icon" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M8 20h24M8 14h24M8 26h24"/>
+            <circle cx="20" cy="20" r="14"/>
+          </svg>
+          <h3>CADR is the only number that matters</h3>
+          <p>Square-footage ratings on purifier boxes are marketing. CADR — Clean Air Delivery Rate — is the AHAM-verified measurement of how much filtered air a unit actually delivers per minute. If a product doesn&rsquo;t publish a CADR, walk away.</p>
+        </article>
+
+        <article class="why__card">
+          <svg class="why__icon" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <rect x="6" y="6" width="28" height="28" rx="2"/>
+            <path d="M14 20l4 4 8-8"/>
+          </svg>
+          <h3>Bigger isn&rsquo;t better</h3>
+          <p>An oversized purifier costs more upfront, runs louder, eats more electricity, and burns through filters faster. A right-sized unit running on medium beats a giant unit running on low — every time.</p>
+        </article>
+
+        <article class="why__card">
+          <svg class="why__icon" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M8 32V16l12-8 12 8v16z"/>
+            <path d="M16 32v-8h8v8"/>
+          </svg>
+          <h3>Every room has its own air</h3>
+          <p>A single &ldquo;whole-house&rdquo; purifier is a marketing fiction. Closed doors, hallway turns, and HVAC currents fragment indoor air. Put a purifier in the room you actually breathe in — bedroom first.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="soon" aria-labelledby="soon-title">
+    <div class="prose">
+      <h2 id="soon-title" class="soon__title">More tools, coming soon</h2>
+      <p class="soon__copy">We&rsquo;re building sizing calculators for dehumidifiers, humidifiers, mini-split systems, and whole-house ventilation. Sign up to know when each launches.</p>
+      <form class="soon__form" action="#" method="post" onsubmit="return false;" novalidate>
+        <label class="visually-hidden" for="email">Email address</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+        <button type="submit" class="btn btn--secondary">Notify me</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="container footer__inner">
+    <p class="footer__brand">The Battle for Better Air — Independent reviews and tools for cleaner indoor air.</p>
+    <p class="footer__disclosure">We earn a commission from products purchased through our links at no extra cost to you. Our recommendations are based on independent research and testing standards, not commission rates.</p>
+    <p class="footer__copy">&copy; 2026 The Battle for Better Air. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="calculator.js" defer></script>
+</body>
+</html>

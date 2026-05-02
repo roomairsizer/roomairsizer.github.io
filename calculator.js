@@ -309,7 +309,10 @@
 
   function init() {
     const form    = document.getElementById('sizer-form');
-    if (!form) return;
+    if (!form) {
+      console.warn('Room Air Sizer: Form not found.');
+      return;
+    }
 
     const lengthEl  = document.getElementById('length');
     const widthEl   = document.getElementById('width');
@@ -324,22 +327,40 @@
     const cfmEl    = document.getElementById('cfm');
     const recEl    = document.getElementById('recommendation');
 
+    if (!lengthEl || !widthEl || !heightEl || !cadrEl) {
+      console.warn('Room Air Sizer: Required elements missing.');
+      return;
+    }
+
+    let hasCalculated = false;
+
+    function resetResults() {
+      if (cadrEl) cadrEl.textContent = '—';
+      if (volumeEl) volumeEl.textContent = '— ft³';
+      if (areaEl) areaEl.textContent = '— ft²';
+      if (cfmEl) cfmEl.textContent = '—';
+      if (recEl) recEl.textContent = 'Enter your room dimensions, then click the button to get your recommendation.';
+      const grid = document.querySelector('.picks__grid');
+      if (grid) grid.innerHTML = '';
+      const note = document.querySelector('.picks__note');
+      if (note) note.textContent = '';
+    }
+
     function compute() {
+      if (!hasCalculated) {
+        resetResults();
+        return;
+      }
+
       const L = parseFloat(lengthEl.value);
       const W = parseFloat(widthEl.value);
       const H = parseFloat(heightEl.value);
       const ach = parseFloat(achEl.value);
-      const concern = concernEl.value;
+      const concern = concernEl ? concernEl.value : 'allergies';
 
       const valid = [L, W, H, ach].every(v => Number.isFinite(v) && v > 0);
       if (!valid) {
-        cadrEl.textContent = '—';
-        volumeEl.textContent = '— ft³';
-        areaEl.textContent = '— ft²';
-        cfmEl.textContent = '—';
-        recEl.textContent = 'Enter your room dimensions to get a recommendation.';
-        const grid = document.querySelector('.picks__grid');
-        if (grid) grid.innerHTML = '';
+        resetResults();
         return;
       }
 
@@ -348,15 +369,17 @@
       const cfm    = (volume * ach) / 60;
       const cadr   = cfm * 1.55;
 
-      cadrEl.textContent   = fmtInt.format(Math.round(cadr));
-      volumeEl.textContent = fmtInt.format(Math.round(volume)) + ' ft³';
-      areaEl.textContent   = fmtInt.format(Math.round(area)) + ' ft²';
-      cfmEl.textContent    = fmtInt.format(Math.round(cfm));
+      if (cadrEl) cadrEl.textContent   = fmtInt.format(Math.round(cadr));
+      if (volumeEl) volumeEl.textContent = fmtInt.format(Math.round(volume)) + ' ft³';
+      if (areaEl) areaEl.textContent   = fmtInt.format(Math.round(area)) + ' ft²';
+      if (cfmEl) cfmEl.textContent    = fmtInt.format(Math.round(cfm));
 
-      const template = CONCERN_COPY[concern] || CONCERN_COPY.allergies;
-      recEl.textContent = template
-        .replace('{area}', fmtInt.format(Math.round(area)))
-        .replace('{cadr}', fmtInt.format(Math.round(cadr)));
+      if (recEl) {
+        const template = CONCERN_COPY[concern] || CONCERN_COPY.allergies;
+        recEl.textContent = template
+          .replace('{area}', fmtInt.format(Math.round(area)))
+          .replace('{cadr}', fmtInt.format(Math.round(cadr)));
+      }
 
       updateRecommendations(cadr, concern);
     }
@@ -364,103 +387,105 @@
     function updateRecommendations(requiredCadr, concern) {
       const grid = document.querySelector('.picks__grid');
       const picksNote = document.querySelector('.picks__note');
-      if (!grid) return;
-
+      
       if (picksNote) {
         picksNote.textContent = 'These picks are ranked by required CADR, selected concern, and how efficiently each purifier covers the room without unnecessary oversizing.';
       }
 
-      let matches = PRODUCTS.filter(p => p.concerns.includes(concern));
-      if (matches.length === 0) matches = [...PRODUCTS];
+      if (!grid) return;
 
-      let sizeMatches = matches.filter(p => p.cadr >= requiredCadr);
-      
-      // Recommendation Logic
-      // 1. Must meet required CADR & match concern (done via filters)
-      // 2. Sort closest CADR above requirement
-      // 3. Preference boost if concernFit strongly matches (we simulate this by checking if the unit is explicitly heavily recommended for VOCs/Asthma, or we just rely on standard sorting since they are already filtered by concern)
-      sizeMatches.sort((a, b) => {
-        let scoreA = a.cadr;
-        let scoreB = b.cadr;
+      try {
+        let matches = PRODUCTS.filter(p => p.concerns && p.concerns.includes(concern));
+        if (matches.length === 0) matches = [...PRODUCTS];
+
+        let sizeMatches = matches.filter(p => p.cadr >= requiredCadr);
         
-        // Minor boost (lower score is better) for specific strong fits based on concern
-        if (concern === 'vocs') {
-            if (a.tradeoff && a.tradeoff.includes('not intended for heavy chemical')) scoreA += 50;
-            if (b.tradeoff && b.tradeoff.includes('not intended for heavy chemical')) scoreB += 50;
-            if (a.tradeoff && a.tradeoff.includes('thin carbon')) scoreA += 50;
-            if (b.tradeoff && b.tradeoff.includes('thin carbon')) scoreB += 50;
+        sizeMatches.sort((a, b) => {
+          let scoreA = a.cadr;
+          let scoreB = b.cadr;
+          
+          if (concern === 'vocs') {
+              if (a.tradeoff && a.tradeoff.includes('not intended for heavy chemical')) scoreA += 50;
+              if (b.tradeoff && b.tradeoff.includes('not intended for heavy chemical')) scoreB += 50;
+              if (a.tradeoff && a.tradeoff.includes('thin carbon')) scoreA += 50;
+              if (b.tradeoff && b.tradeoff.includes('thin carbon')) scoreB += 50;
+          }
+          
+          return scoreA - scoreB;
+        });
+
+        let top3 = sizeMatches.slice(0, 3);
+
+        if (top3.length < 3) {
+          let remaining = matches.filter(p => !top3.includes(p));
+          remaining.sort((a, b) => b.cadr - a.cadr);
+          
+          while (top3.length < 3 && remaining.length > 0) {
+            top3.push(remaining.shift());
+          }
         }
-        
-        return scoreA - scoreB;
-      });
 
-      let top3 = sizeMatches.slice(0, 3);
+        grid.innerHTML = top3.map((product, idx) => {
+          let tag = 'Top Pick';
+          if (idx === 1) tag = 'Great Alternative';
+          if (idx === 2) tag = 'Also Consider';
+          
+          let headroom = product.cadr - requiredCadr;
+          let pct = requiredCadr > 0 ? Math.round((headroom / requiredCadr) * 100) : 0;
+          let status = '';
+          let whyCopy = '';
 
-      if (top3.length < 3) {
-        let remaining = matches.filter(p => !top3.includes(p));
-        // Sort remaining by highest CADR available
-        remaining.sort((a, b) => b.cadr - a.cadr);
-        
-        while (top3.length < 3 && remaining.length > 0) {
-          top3.push(remaining.shift());
-        }
+          const fitCopy = (product.concernFit && product.concernFit[concern]) ? product.concernFit[concern] : 'Selected for its overall performance and value.';
+
+          if (product.cadr >= requiredCadr) {
+             if (pct < 30) {
+                status = 'Efficient Match';
+             } else {
+                status = 'High-Headroom Pick';
+             }
+             whyCopy = `Your room needs about ${Math.round(requiredCadr)} CADR. This model delivers ${product.cadr} CADR, giving you roughly ${pct}% extra clean-air capacity without unnecessary oversizing. ${fitCopy}`;
+          } else {
+             tag = 'Highest Available';
+             status = 'Underpowered for Space';
+             whyCopy = `This room needs about ${Math.round(requiredCadr)} CADR. This model is below that target, but it is one of the strongest available options in the current list. For a space this large, consider using two purifiers or reducing the target room zone. ${fitCopy}`;
+          }
+
+          const link = `https://www.amazon.com/dp/${product.asin}/ref=nosim?tag=${AMAZON_TAG}`;
+          const strengthsHtml = product.strengths ? product.strengths.map(s => `<li>${s}</li>`).join('') : '';
+
+          return `
+            <article class="pick pick--authority">
+              <p class="pick__tag">${tag}</p>
+              <h4 class="pick__name">${product.name}</h4>
+              <p class="pick__meta">CADR: ${product.cadr} &nbsp;|&nbsp; Price: ${product.priceTier} &nbsp;|&nbsp; <span class="pick__status">${status}</span></p>
+              
+              <div class="pick__why">
+                <strong>Why this matched your room</strong>
+                <p>${whyCopy}</p>
+              </div>
+
+              <p class="pick__best"><strong>Best for:</strong> ${product.bestFor || 'General use'}</p>
+
+              <ul class="pick__strengths">
+                ${strengthsHtml}
+              </ul>
+
+              <div class="pick__tradeoff">
+                <strong>Know before buying</strong>
+                <p>${product.tradeoff || 'No major tradeoffs.'}</p>
+              </div>
+
+              <a class="btn btn--secondary" href="${link}" target="_blank" rel="noopener sponsored nofollow" aria-label="View ${product.name} on Amazon">View on Amazon</a>
+            </article>
+          `;
+        }).join('');
+      } catch (e) {
+        console.error('Error updating recommendations:', e);
       }
-
-      grid.innerHTML = top3.map((product, idx) => {
-        let tag = 'Top Pick';
-        if (idx === 1) tag = 'Great Alternative';
-        if (idx === 2) tag = 'Also Consider';
-        
-        let headroom = product.cadr - requiredCadr;
-        let pct = requiredCadr > 0 ? Math.round((headroom / requiredCadr) * 100) : 0;
-        let status = '';
-        let whyCopy = '';
-
-        if (product.cadr >= requiredCadr) {
-           if (pct < 30) {
-              status = 'Efficient Match';
-           } else {
-              status = 'High-Headroom Pick';
-           }
-           whyCopy = \`Your room needs about \${Math.round(requiredCadr)} CADR. This model delivers \${product.cadr} CADR, giving you roughly \${pct}% extra clean-air capacity without unnecessary oversizing. \${product.concernFit[concern] || product.concernFit.allergies}\`;
-        } else {
-           tag = 'Highest Available';
-           status = 'Underpowered for Space';
-           whyCopy = \`This room needs about \${Math.round(requiredCadr)} CADR. This model is below that target, but it is one of the strongest available options in the current list. For a space this large, consider using two purifiers or reducing the target room zone. \${product.concernFit[concern] || product.concernFit.allergies}\`;
-        }
-
-        const link = \`https://www.amazon.com/dp/\${product.asin}/ref=nosim?tag=\${AMAZON_TAG}\`;
-        const strengthsHtml = product.strengths.map(s => \`<li>\${s}</li>\`).join('');
-
-        return \`
-          <article class="pick pick--authority">
-            <p class="pick__tag">\${tag}</p>
-            <h4 class="pick__name">\${product.name}</h4>
-            <p class="pick__meta">CADR: \${product.cadr} &nbsp;|&nbsp; Price: \${product.priceTier} &nbsp;|&nbsp; <span class="pick__status">\${status}</span></p>
-            
-            <div class="pick__why">
-              <strong>Why this matched your room</strong>
-              <p>\${whyCopy}</p>
-            </div>
-
-            <p class="pick__best"><strong>Best for:</strong> \${product.bestFor}</p>
-
-            <ul class="pick__strengths">
-              \${strengthsHtml}
-            </ul>
-
-            <div class="pick__tradeoff">
-              <strong>Know before buying</strong>
-              <p>\${product.tradeoff}</p>
-            </div>
-
-            <a class="btn btn--secondary" href="\${link}" target="_blank" rel="noopener sponsored" aria-label="View \${product.name} on Amazon">View on Amazon</a>
-          </article>
-        \`;
-      }).join('');
     }
 
     function updateAchVisuals() {
+      if (!achEl) return;
       const v   = parseFloat(achEl.value);
       const min = parseFloat(achEl.min) || 2;
       const max = parseFloat(achEl.max) || 8;
@@ -469,14 +494,25 @@
       if (achOut) achOut.textContent = Number.isInteger(v) ? String(v) : v.toFixed(1);
     }
 
-    form.addEventListener('input', e => {
-      if (e.target === achEl) updateAchVisuals();
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      hasCalculated = true;
       compute();
     });
-    form.addEventListener('change', compute);
+
+    form.addEventListener('input', e => {
+      if (e.target === achEl) updateAchVisuals();
+      if (hasCalculated) compute();
+    });
+    
+    form.addEventListener('change', e => {
+      if (hasCalculated) compute();
+    });
 
     updateAchVisuals();
-    compute();
+    resetResults();
+    
+    console.info('Room Air Sizer calculator initialized.');
   }
 
   function initTooltips() {

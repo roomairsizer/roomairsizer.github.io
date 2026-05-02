@@ -403,6 +403,16 @@ a:hover { color: var(--text); }
 }
 .field select option { background: #0f172a; color: var(--text); }
 
+.calc__actions {
+  margin-top: 1rem;
+}
+.calc__submit {
+  width: 100%;
+  justify-content: center;
+  padding: 1.1em 1.5em;
+  font-size: 1.05rem;
+}
+
 /* Range slider */
 .field input[type="range"] {
   -webkit-appearance: none;

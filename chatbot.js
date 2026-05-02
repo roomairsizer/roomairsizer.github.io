@@ -147,18 +147,18 @@
 
   function renderMessage(msg) {
     const div = document.createElement('div');
-    div.className = \`chat-msg chat-msg--\${msg.sender}\`;
+    div.className = `chat-msg chat-msg--${msg.sender}`;
     
     let avatar = '';
     if (msg.sender === 'bot') {
-      avatar = \`<div class="chat-msg__avatar">\${SVG_ICON}</div>\`;
+      avatar = `<div class="chat-msg__avatar">${SVG_ICON}</div>`;
     }
 
     let textHtml = msg.text;
     if (msg.links && msg.links.length > 0) {
       let linksHtml = '<div class="chat-msg__links" style="margin-top: 10px; display: flex; flex-direction: column; gap: 6px;">';
       msg.links.forEach(l => {
-        linksHtml += \`<a href="\${l.href}" style="color: var(--chat-primary); text-decoration: underline; font-weight: 500;">\${l.text} &rarr;</a>\`;
+        linksHtml += `<a href="${l.href}" style="color: var(--chat-primary); text-decoration: underline; font-weight: 500;">${l.text} &rarr;</a>`;
       });
       linksHtml += '</div>';
       textHtml += linksHtml;
@@ -167,11 +167,11 @@
     // Convert markdown-style links to actual links if they exist in the text
     textHtml = textHtml.replace(/\\[(.*?)\\]\\((.*?)\\)/g, '<a href="$2" style="color: var(--chat-primary); text-decoration: underline;">$1</a>');
 
-    div.innerHTML = \`
-      \${avatar}
-      <div class="chat-msg__text">\${textHtml}</div>
-      <span class="chat-msg__time">\${msg.time}</span>
-    \`;
+    div.innerHTML = `
+      ${avatar}
+      <div class="chat-msg__text">${textHtml}</div>
+      <span class="chat-msg__time">${msg.time}</span>
+    `;
     
     chatBody.appendChild(div);
   }
@@ -204,14 +204,14 @@
     const dimMatch = lower.match(/(\\d+)\\s*(?:x|by|\\*)\\s*(\\d+)/);
     if (dimMatch) {
       area = parseInt(dimMatch[1]) * parseInt(dimMatch[2]);
-      desc = \`\${dimMatch[1]}x\${dimMatch[2]} foot\`;
+      desc = `${dimMatch[1]}x${dimMatch[2]} foot`;
     }
 
     // Pattern 2: SqFt
     const sqftMatch = lower.match(/(\\d+)\\s*(?:sqft|sq ft|square feet|square foot)/);
     if (!area && sqftMatch) {
       area = parseInt(sqftMatch[1]);
-      desc = \`\${area} sq. ft.\`;
+      desc = `${area} sq. ft.`;
     }
 
     if (!area) return null;
@@ -232,7 +232,7 @@
     else if (lower.includes("basement")) roomType = "basement";
     else if (lower.includes("office")) roomType = "office";
 
-    return { area, height, desc: \`\${desc} \${roomType}\` };
+    return { area, height, desc: `${desc} ${roomType}` };
   }
 
   function matchIntent(text) {
@@ -334,7 +334,7 @@
     const cfm = (volume * ach) / 60;
     const cadr = cfm * 1.55;
 
-    const response = \`For a \${dims.desc} with \${dims.height}ft ceilings and \${concern} concerns, you need a CADR of approximately \${Math.round(cadr)}. \${reasoning}\`;
+    const response = `For a ${dims.desc} with ${dims.height}ft ceilings and ${concern} concerns, you need a CADR of approximately ${Math.round(cadr)}. ${reasoning}`;
     
     addMessage('bot', response);
     
@@ -387,21 +387,21 @@
     // Render Products
     let html = '';
     recommended.forEach(p => {
-      const link = \`https://www.amazon.com/dp/\${p.asin}/ref=nosim?tag=\${tag}\`;
+      const link = `https://www.amazon.com/dp/${p.asin}/ref=nosim?tag=${tag}`;
       const concernCopy = p.concernFit[concern] || p.concernFit['dust'] || 'A reliable choice for general air quality.';
       
-      const gaEvent = \`gtag('event', 'chatbot_affiliate_click', { product_name: '\${p.name.replace(/'/g, "\\'")}', product_asin: '\${p.asin}', required_cadr: \${Math.round(requiredCadr)}, concern: '\${concern}' });\`;
-      const onClickStr = typeof gtag === 'function' ? \`onclick="\${gaEvent}"\` : '';
+      const gaEvent = `gtag('event', 'chatbot_affiliate_click', { product_name: '${p.name.replace(/'/g, "\\'")}', product_asin: '${p.asin}', required_cadr: ${Math.round(requiredCadr)}, concern: '${concern}' });`;
+      const onClickStr = typeof gtag === 'function' ? `onclick="${gaEvent}"` : '';
 
-      html += \`
+      html += `
         <div class="chatbot-product-card">
-          <h4 class="chatbot-product-card__name">\${p.name}</h4>
-          <div class="chatbot-product-card__stats">CADR: \${p.cadr} | Price: \${p.priceTier}</div>
-          <div class="chatbot-product-card__desc">\${p.bestFor}</div>
-          <div class="chatbot-product-card__fit">\${concernCopy}</div>
-          <a href="\${link}" target="_blank" rel="noopener sponsored nofollow" class="chatbot-product-card__btn" \${onClickStr}>Check Price on Amazon</a>
+          <h4 class="chatbot-product-card__name">${p.name}</h4>
+          <div class="chatbot-product-card__stats">CADR: ${p.cadr} | Price: ${p.priceTier}</div>
+          <div class="chatbot-product-card__desc">${p.bestFor}</div>
+          <div class="chatbot-product-card__fit">${concernCopy}</div>
+          <a href="${link}" target="_blank" rel="noopener sponsored nofollow" class="chatbot-product-card__btn" ${onClickStr}>Check Price on Amazon</a>
         </div>
-      \`;
+      `;
     });
 
     addMessage('bot', html);

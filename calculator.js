@@ -27,7 +27,7 @@
       description: 'A quiet, compact workhorse for small bedrooms. True HEPA handles dust and dander without breaking the bank.'
     },
     {
-      asin: 'B08F22Q2TJ',
+      asin: 'B089K12H7R',
       name: 'Levoit Core 400S',
       cadr: 260,
       priceTier: '$$',
@@ -35,7 +35,7 @@
       description: 'Smart features meet solid performance. Quiet enough for sleep, powerful enough for standard bedrooms.'
     },
     {
-      asin: 'B09GTRNJNN',
+      asin: 'B09BJMY8HL',
       name: 'Levoit Core 600S',
       cadr: 410,
       priceTier: '$$',
@@ -67,14 +67,6 @@
       description: 'Features a washable AOC carbon filter that genuinely helps with odors, unlike standard thin carbon sheets.'
     },
     {
-      asin: 'B0BP2F4BGB',
-      name: 'Blueair Blue Pure 411a Max',
-      cadr: 141,
-      priceTier: '$',
-      concerns: ['allergies', 'smoke', 'pets', 'dust'],
-      description: 'Minimalist design with a washable fabric pre-filter. Blends into the room while quietly doing its job.'
-    },
-    {
       asin: 'B0BP2GBV3J',
       name: 'Blueair Blue Pure 311i Max',
       cadr: 250,
@@ -83,7 +75,7 @@
       description: 'Exceptionally quiet operation. A great balance of CADR and noise levels for primary bedrooms.'
     },
     {
-      asin: 'B0BP2CS717',
+      asin: 'B0BN2MGV5H',
       name: 'Blueair Blue Pure 211i Max',
       cadr: 410,
       priceTier: '$$$',
@@ -99,30 +91,6 @@
       description: 'Utilitarian and loud on high, but moves an impressive amount of air for the price point.'
     },
     {
-      asin: 'B08F91R8S9',
-      name: 'Medify MA-40',
-      cadr: 380,
-      priceTier: '$$',
-      concerns: ['allergies', 'smoke', 'pets', 'dust'],
-      description: 'Medical-grade H13 HEPA. Excellent for strict allergen control, backed by a lifetime warranty.'
-    },
-    {
-      asin: 'B08S2X6SBC',
-      name: 'Medify MA-50',
-      cadr: 500,
-      priceTier: '$$$',
-      concerns: ['allergies', 'smoke', 'pets', 'dust', 'asthma'],
-      description: 'Commercial-grade airflow in a residential chassis. When you need air cleared fast, this is the tool.'
-    },
-    {
-      asin: 'B00021XL2U',
-      name: 'Austin Air HealthMate HM400',
-      cadr: 400,
-      priceTier: '$$$',
-      concerns: ['vocs', 'smoke', 'allergies', 'asthma'],
-      description: 'Packs 15 lbs of activated carbon and zeolite. The undisputed champion for heavy VOCs and chemical odors.'
-    },
-    {
       asin: 'B002VXDCHW',
       name: 'IQAir HealthPro Plus',
       cadr: 300,
@@ -131,7 +99,7 @@
       description: 'HyperHEPA filtration down to 0.003 microns. Professional-grade tool for severe asthma and allergies.'
     },
     {
-      asin: 'B07M6TMWX8',
+      asin: 'B07FW2QQ4K',
       name: 'Alen BreatheSmart 75i',
       cadr: 347,
       priceTier: '$$$',
@@ -139,7 +107,7 @@
       description: 'Premium build with customizable panels. Exceptionally quiet for its high CADR output.'
     },
     {
-      asin: 'B0B1MGG312',
+      asin: 'B08H4DZ5MD',
       name: 'Coway Airmega 250',
       cadr: 249,
       priceTier: '$$',
@@ -153,6 +121,22 @@
       priceTier: '$',
       concerns: ['allergies', 'dust', 'pets'],
       description: 'An entry-level tower model. Best suited for very small rooms, bathrooms, or tight dorm spaces.'
+    },
+    {
+      asin: 'B0BGPF71Q6',
+      name: 'Levoit Vital 200S-P',
+      cadr: 245,
+      priceTier: '$$',
+      concerns: ['allergies', 'pets', 'dust'],
+      description: 'Specifically designed for pet owners, featuring a washable pre-filter and high CADR for pet dander.'
+    },
+    {
+      asin: 'B07KQBNM7H',
+      name: 'Winix AM90',
+      cadr: 233,
+      priceTier: '$$',
+      concerns: ['allergies', 'smoke', 'pets', 'dust', 'vocs'],
+      description: 'Smart Wi-Fi enabled purifier with PlasmaWave technology and True HEPA filtration.'
     }
   ];
 

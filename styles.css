@@ -1158,6 +1158,35 @@ output {
   color: var(--accent);
 }
 
+/* Guide Images ------------------------------------------------------------ */
+
+.guide-hero-image {
+  margin: 2rem 0 3rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+}
+
+.guide-hero-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.guide-hero-image figcaption {
+  padding: 1rem 1.5rem;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border-top: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.01);
+  text-align: center;
+}
+
 /* Reduced motion -------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

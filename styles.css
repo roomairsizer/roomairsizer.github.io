@@ -104,6 +104,22 @@ a:hover { color: var(--text); }
   overflow: hidden; clip: rect(0,0,0,0);
   white-space: nowrap; border: 0;
 }
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  padding: 0.55em 1.1em;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  border-radius: var(--radius-sm);
+  z-index: 200;
+  transition: top var(--t-fast);
+  text-decoration: none;
+}
+.skip-link:focus { top: 0.75rem; color: var(--bg); }
 
 /* Buttons --------------------------------------------------------------- */
 .btn {

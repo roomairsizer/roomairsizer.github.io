@@ -1,0 +1,24 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Local environment
+.env
+.env.local
+*.log
+
+# Local assistant / tooling configs (not part of the deployed site)
+.claude/
+
+# Build artifacts (none expected in V1, future-proofing)
+node_modules/
+dist/
+.cache/

@@ -38,7 +38,7 @@
       }
     },
     {
-      asin: 'B089K12H7R',
+      asin: 'B08R794ZMX',
       name: 'Levoit Core 400S',
       cadr: 260,
       priceTier: '$$',
@@ -608,4 +608,9 @@
   } else {
     init(); initTooltips(); initNavScroll(); initReducedMotion(); initEmailForm();
   }
+
+  // Expose data to Chatbot
+  window.AIRBOT_PRODUCTS = PRODUCTS;
+  window.AIRBOT_AMAZON_TAG = AMAZON_TAG;
+
 })();

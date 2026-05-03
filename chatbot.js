@@ -9,7 +9,8 @@
   const CLOSE_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
   const SEND_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>`;
 
-  let chatContainer, chatToggle, chatPanel, chatBody, chatInput, chatSend;
+  let chatContainer, chatMascot, chatPanel, chatBody, chatInput, chatSend, mascotBubble;
+  let poseInterval = null;
   let history = JSON.parse(sessionStorage.getItem('chat_history') || '[]');
   
   // Context tracking
@@ -31,7 +32,7 @@
     bindEvents();
     
     if (history.length === 0) {
-      addMessage('bot', "Greetings! I'm Professor BBA, your air quality specialist. I've spent decades studying indoor air — pollen, smoke, dust, allergens, the works. Tell me your room size and your concern, and I'll size the right purifier for your space. Or ask me anything about CADR, HEPA filters, or specific air quality issues. What can I help you investigate?");
+      addMessage('bot', "Greetings! I'm Dr. Breathewell, your air quality specialist. I've spent decades studying indoor air — pollen, smoke, dust, allergens, the works. Tell me your room size and your concern, and I'll size the right purifier for your space. Or ask me anything about CADR, HEPA filters, or specific air quality issues. What can I help you investigate?");
     } else {
       renderHistory();
     }
@@ -41,14 +42,18 @@
     chatContainer = document.createElement('div');
     chatContainer.id = 'chat-container';
     chatContainer.innerHTML = `
-      <button class="chat-toggle" aria-label="Open Chat Assistant" aria-expanded="false">
-      </button>
+      <div id="bba-mascot" class="mascot-container" aria-label="Open Chat Assistant" role="button" tabindex="0">
+        <img src="images/mascot-icon.png" class="mascot-pose pose-icon is-active" alt="Dr. Breathewell">
+        <img src="images/mascot-header.png" class="mascot-pose pose-header" alt="Dr. Breathewell">
+        <img src="images/mascot-thinking.png" class="mascot-pose pose-thinking" alt="Dr. Breathewell">
+        <div class="mascot-bubble">Need help sizing a purifier?</div>
+      </div>
       <div class="chat-panel" role="dialog" aria-label="Chat Assistant">
         <header class="chat-header">
           <div class="chat-header__title" style="display: flex; align-items: center; gap: 12px;">
             <div style="width: 48px; height: 48px; border-radius: 50%; background-image: url('images/mascot-header.png'); background-size: cover; background-position: center top; background-repeat: no-repeat; border: 2px solid var(--chat-primary); flex-shrink: 0;"></div>
             <div style="display: flex; flex-direction: column; line-height: 1.2;">
-              <span style="font-size: 1.1rem; font-weight: 600;">Professor BBA</span>
+              <span style="font-size: 1.1rem; font-weight: 600;">Dr. Breathewell</span>
               <span style="font-size: 0.8rem; color: var(--chat-text-dim); font-family: 'Inter', sans-serif;">Air Quality Specialist</span>
             </div>
           </div>
@@ -67,15 +72,85 @@
     `;
     document.body.appendChild(chatContainer);
 
-    chatToggle = chatContainer.querySelector('.chat-toggle');
+    chatMascot = chatContainer.querySelector('#bba-mascot');
+    mascotBubble = chatMascot.querySelector('.mascot-bubble');
     chatPanel  = chatContainer.querySelector('.chat-panel');
     chatBody   = chatContainer.querySelector('.chat-body');
     chatInput  = chatContainer.querySelector('.chat-input');
     chatSend   = chatContainer.querySelector('.chat-send');
+    
+    initMascot();
+  }
+
+  function initMascot() {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hasWalkedIn = sessionStorage.getItem('drbreathewell_walkin');
+    
+    if (!hasWalkedIn) {
+      if (!prefersReduced) {
+        chatMascot.style.transform = 'translateX(120%)';
+        setTimeout(() => {
+          chatMascot.style.transform = '';
+          chatMascot.classList.add('mascot-walk-in');
+          setTimeout(() => {
+            if (!sessionStorage.getItem('drbreathewell_bubble') && !chatPanel.classList.contains('is-active')) {
+              showBubble();
+            }
+          }, 5000);
+        }, 800);
+      } else {
+        chatMascot.style.opacity = '0';
+        setTimeout(() => { chatMascot.style.opacity = '1'; }, 100);
+      }
+      sessionStorage.setItem('drbreathewell_walkin', 'true');
+    } else {
+      chatMascot.classList.add('mascot-idle');
+    }
+    
+    chatMascot.addEventListener('animationend', (e) => {
+      if (e.animationName === 'mascot-walk') {
+        chatMascot.classList.remove('mascot-walk-in');
+        if (!prefersReduced) chatMascot.classList.add('mascot-idle');
+      }
+    });
+
+    if (!prefersReduced) {
+      startPoseCycling();
+    }
+  }
+
+  function showBubble() {
+    mascotBubble.classList.add('show-bubble');
+    setTimeout(() => { dismissBubble(); }, 6000);
+  }
+
+  function dismissBubble() {
+    if (mascotBubble.classList.contains('show-bubble')) {
+      mascotBubble.classList.remove('show-bubble');
+      sessionStorage.setItem('drbreathewell_bubble', 'true');
+    }
+  }
+
+  function startPoseCycling() {
+    const poses = chatMascot.querySelectorAll('.mascot-pose');
+    let currentPose = 0;
+    const times = [3000, 3000, 2000];
+    
+    function nextPose() {
+      if (chatPanel.classList.contains('is-active')) return;
+      poses[currentPose].classList.remove('is-active');
+      currentPose = (currentPose + 1) % poses.length;
+      poses[currentPose].classList.add('is-active');
+      poseInterval = setTimeout(nextPose, times[currentPose]);
+    }
+    poseInterval = setTimeout(nextPose, times[0]);
   }
 
   function bindEvents() {
-    chatToggle.addEventListener('click', toggleChat);
+    chatMascot.addEventListener('click', () => {
+      dismissBubble();
+      toggleChat();
+    });
     chatContainer.querySelector('.chat-close').addEventListener('click', toggleChat);
     
     chatSend.addEventListener('click', handleSend);
@@ -93,9 +168,23 @@
   function toggleChat() {
     const isActive = chatPanel.classList.contains('is-active');
     chatPanel.classList.toggle('is-active');
-    chatToggle.setAttribute('aria-expanded', !isActive);
-    if (!isActive) {
+    
+    if (isActive) {
+      chatMascot.style.opacity = '1';
+      chatMascot.style.pointerEvents = 'auto';
+    } else {
+      chatMascot.style.opacity = '0';
+      chatMascot.style.pointerEvents = 'none';
       setTimeout(() => chatInput.focus(), 250);
+      
+      if (poseInterval) {
+        clearTimeout(poseInterval);
+        poseInterval = null;
+      }
+    }
+    
+    if (isActive && window.matchMedia && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      startPoseCycling();
     }
   }
 
@@ -122,7 +211,7 @@
     typingIndicator.innerHTML = `
       <div class="chat-msg__avatar typing-avatar"></div>
       <div class="chat-msg__text">
-        <span style="color: var(--chat-text-dim); font-size: 0.9rem; font-style: italic; margin-right: 6px;">Professor BBA is analyzing</span>
+        <span style="color: var(--chat-text-dim); font-size: 0.9rem; font-style: italic; margin-right: 6px;">Dr. Breathewell is analyzing</span>
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
       </div>
     `;
@@ -137,9 +226,9 @@
     }
   }
 
-  function addMessage(sender, text, links = []) {
+  function addMessage(sender, text, links = [], isHtml = false) {
     const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const msg = { sender, text, time, links };
+    const msg = { sender, text, time, links, isHtml };
     
     history.push(msg);
     sessionStorage.setItem('chat_history', JSON.stringify(history));
@@ -168,17 +257,44 @@
     }
 
     let textHtml = msg.text;
+
+    if (msg.sender === 'bot') {
+      if (!msg.isHtml) {
+        textHtml = textHtml
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+        
+        textHtml = textHtml.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, label, url) => {
+          let cleanUrl = url.trim();
+          if (cleanUrl.includes(':') && !cleanUrl.startsWith('http://') && !cleanUrl.startsWith('https://')) {
+            return match;
+          }
+          return `<a href="${cleanUrl}" class="chatbot-link">${label}</a>`;
+        });
+      }
+    } else if (msg.sender === 'user') {
+      textHtml = textHtml
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
     if (msg.links && msg.links.length > 0) {
       let linksHtml = '<div class="chat-msg__links" style="margin-top: 10px; display: flex; flex-direction: column; gap: 6px;">';
       msg.links.forEach(l => {
-        linksHtml += `<a href="${l.href}" style="color: var(--chat-primary); text-decoration: underline; font-weight: 500;">${l.text} &rarr;</a>`;
+        let cleanHref = l.href.trim();
+        if (!cleanHref.includes(':') || cleanHref.startsWith('http://') || cleanHref.startsWith('https://')) {
+          linksHtml += `<a href="${cleanHref}" class="chatbot-link" style="font-weight: 500;">${l.text} &rarr;</a>`;
+        }
       });
       linksHtml += '</div>';
       textHtml += linksHtml;
     }
-
-    // Convert markdown-style links to actual links if they exist in the text
-    textHtml = textHtml.replace(/\\[(.*?)\\]\\((.*?)\\)/g, '<a href="$2" style="color: var(--chat-primary); text-decoration: underline;">$1</a>');
 
     div.innerHTML = `
       ${avatar}
@@ -391,9 +507,8 @@
       }
     }
 
-    // Handle Disclosure
     if (!sessionStorage.getItem('chat_disclosure')) {
-      addMessage('bot', '<div class="chat-disclosure">Quick heads up: product links below are Amazon affiliate links. We may earn a small commission if you buy — at no extra cost to you. Our picks are based on CADR math, not commission rates.</div>');
+      addMessage('bot', '<div class="chat-disclosure">Quick heads up: product links below are Amazon affiliate links. We may earn a small commission if you buy — at no extra cost to you. Our picks are based on CADR math, not commission rates.</div>', [], true);
       sessionStorage.setItem('chat_disclosure', 'true');
     }
 
@@ -417,7 +532,7 @@
       `;
     });
 
-    addMessage('bot', html);
+    addMessage('bot', html, [], true);
 
     // Fallback message for large rooms
     if (sizeMatches.length < 2) {

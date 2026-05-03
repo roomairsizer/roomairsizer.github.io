@@ -43,15 +43,15 @@
     chatContainer.id = 'chat-container';
     chatContainer.innerHTML = `
       <div id="bba-mascot" class="mascot-container" aria-label="Open Chat Assistant" role="button" tabindex="0">
-        <img src="images/mascot-icon.png" class="mascot-pose pose-icon is-active" alt="Dr. Breathewell">
-        <img src="images/mascot-header.png" class="mascot-pose pose-header" alt="Dr. Breathewell">
-        <img src="images/mascot-thinking.png" class="mascot-pose pose-thinking" alt="Dr. Breathewell">
+        <img src="images/mascot-icon.png?v=2" class="mascot-pose pose-icon is-active" alt="Dr. Breathewell">
+        <img src="images/mascot-header.png?v=2" class="mascot-pose pose-header" alt="Dr. Breathewell">
+        <img src="images/mascot-thinking.png?v=2" class="mascot-pose pose-thinking" alt="Dr. Breathewell">
         <div class="mascot-bubble">Need help sizing a purifier?</div>
       </div>
       <div class="chat-panel" role="dialog" aria-label="Chat Assistant">
         <header class="chat-header">
           <div class="chat-header__title" style="display: flex; align-items: center; gap: 12px;">
-            <div style="width: 48px; height: 48px; border-radius: 50%; background-image: url('images/mascot-header.png'); background-size: cover; background-position: center top; background-repeat: no-repeat; border: 2px solid var(--chat-primary); flex-shrink: 0;"></div>
+            <div style="width: 48px; height: 48px; border-radius: 50%; background-image: url('images/mascot-header.png?v=2'); background-size: cover; background-position: center top; background-repeat: no-repeat; border: 2px solid var(--chat-primary); flex-shrink: 0;"></div>
             <div style="display: flex; flex-direction: column; line-height: 1.2;">
               <span style="font-size: 1.1rem; font-weight: 600;">Dr. Breathewell</span>
               <span style="font-size: 0.8rem; color: var(--chat-text-dim); font-family: 'Inter', sans-serif;">Air Quality Specialist</span>

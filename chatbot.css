@@ -256,7 +256,7 @@
 }
 
 .bot-avatar {
-  background-image: url('images/mascot-icon.png');
+  background-image: url('images/mascot-icon.png?v=2');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
@@ -267,7 +267,7 @@
   width: 36px;
   height: 36px;
   left: -44px;
-  background-image: url('images/mascot-thinking.png');
+  background-image: url('images/mascot-thinking.png?v=2');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;

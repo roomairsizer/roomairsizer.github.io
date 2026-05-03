@@ -46,7 +46,7 @@
         <img src="images/mascot-icon.png?v=2" class="mascot-pose pose-icon is-active" alt="Dr. Breathewell">
         <img src="images/mascot-header.png?v=2" class="mascot-pose pose-header" alt="Dr. Breathewell">
         <img src="images/mascot-thinking.png?v=2" class="mascot-pose pose-thinking" alt="Dr. Breathewell">
-        <div class="mascot-bubble">Need help sizing a purifier?</div>
+        <div class="mascot-bubble">Ask me any questions you need!</div>
       </div>
       <div class="chat-panel" role="dialog" aria-label="Chat Assistant">
         <header class="chat-header">
@@ -57,7 +57,8 @@
               <span style="font-size: 0.8rem; color: var(--chat-text-dim); font-family: 'Inter', sans-serif;">Air Quality Specialist</span>
             </div>
           </div>
-          <button class="chat-close" aria-label="Close Chat">
+          <button class="chat-close" aria-label="Close Chat" style="display:flex; align-items:center; gap:6px; background: rgba(255,255,255,0.1); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 500; color: #f8fafc; border: 1px solid rgba(255,255,255,0.2);">
+            <span>Close</span>
             ${CLOSE_ICON}
           </button>
         </header>
@@ -93,18 +94,24 @@
           chatMascot.style.transform = '';
           chatMascot.classList.add('mascot-walk-in');
           setTimeout(() => {
-            if (!sessionStorage.getItem('drbreathewell_bubble') && !chatPanel.classList.contains('is-active')) {
+            if (!sessionStorage.getItem('chat_opened')) {
               showBubble();
             }
-          }, 5000);
+          }, 2000);
         }, 800);
       } else {
         chatMascot.style.opacity = '0';
-        setTimeout(() => { chatMascot.style.opacity = '1'; }, 100);
+        setTimeout(() => { 
+          chatMascot.style.opacity = '1'; 
+          if (!sessionStorage.getItem('chat_opened')) showBubble();
+        }, 100);
       }
       sessionStorage.setItem('drbreathewell_walkin', 'true');
     } else {
       chatMascot.classList.add('mascot-idle');
+      if (!sessionStorage.getItem('chat_opened') && !chatPanel.classList.contains('is-active')) {
+        setTimeout(showBubble, 1500);
+      }
     }
     
     chatMascot.addEventListener('animationend', (e) => {
@@ -121,13 +128,11 @@
 
   function showBubble() {
     mascotBubble.classList.add('show-bubble');
-    setTimeout(() => { dismissBubble(); }, 6000);
   }
 
   function dismissBubble() {
     if (mascotBubble.classList.contains('show-bubble')) {
       mascotBubble.classList.remove('show-bubble');
-      sessionStorage.setItem('drbreathewell_bubble', 'true');
     }
   }
 
@@ -172,7 +177,9 @@
     if (isActive) {
       chatMascot.style.opacity = '1';
       chatMascot.style.pointerEvents = 'auto';
+      // if they haven't used it, maybe show bubble again? No, once opened, it stays hidden.
     } else {
+      sessionStorage.setItem('chat_opened', 'true');
       chatMascot.style.opacity = '0';
       chatMascot.style.pointerEvents = 'none';
       setTimeout(() => chatInput.focus(), 250);

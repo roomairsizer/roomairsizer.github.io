@@ -323,7 +323,7 @@
     const lower = text.toLowerCase();
     for (const [concern, keywords] of Object.entries(CONCERN_MAP)) {
       for (const keyword of keywords) {
-        if (new RegExp('\\\\b' + keyword + '\\\\b').test(lower)) {
+        if (new RegExp('\\b' + keyword + '\\b').test(lower)) {
           return concern;
         }
       }
@@ -382,7 +382,7 @@
       for (const entry of category) {
         let score = 0;
         for (const trigger of entry.triggers) {
-          if (new RegExp('\\\\b' + trigger + '\\\\b', 'i').test(lower)) {
+          if (new RegExp('\\b' + trigger + '\\b', 'i').test(lower)) {
             score++;
           }
         }

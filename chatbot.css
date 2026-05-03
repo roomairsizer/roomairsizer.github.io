@@ -22,6 +22,10 @@
   height: 64px;
   border-radius: 50%;
   background: var(--chat-surface);
+  background-image: url('images/mascot-icon.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
   border: 1px solid rgba(125, 211, 252, 0.3);
   cursor: pointer;
   z-index: 9999;
@@ -37,14 +41,11 @@
 
 .chat-toggle:hover {
   transform: translateY(-4px);
-  background: #243147;
   box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.6), 0 0 25px rgba(125, 211, 252, 0.4);
 }
 
 .chat-toggle svg {
-  width: 28px;
-  height: 28px;
-  stroke: currentColor;
+  display: none;
 }
 
 @keyframes chat-pulse {
@@ -168,17 +169,46 @@
 
 .chat-msg__avatar {
   position: absolute;
-  left: -36px;
+  left: -40px;
   bottom: 0;
-  width: 28px;
-  height: 28px;
-  background: var(--chat-surface);
-  border: 1px solid rgba(125, 211, 252, 0.2);
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--chat-primary);
+}
+
+.bot-avatar {
+  background-image: url('images/mascot-icon.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  border: 1px solid rgba(125, 211, 252, 0.2);
+}
+
+.typing-avatar {
+  width: 36px;
+  height: 36px;
+  left: -44px;
+  background-image: url('images/mascot-thinking.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  border: 1px solid rgba(125, 211, 252, 0.2);
+  animation: thinking-pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes thinking-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
 }
 
 .chat-msg__avatar svg {
@@ -243,7 +273,7 @@
 }
 
 .chat-msg--typing {
-  padding: 16px;
+  padding: 12px 16px;
   background: var(--chat-surface);
   color: var(--chat-text);
   border-bottom-left-radius: 4px;
@@ -371,6 +401,9 @@
 @media (prefers-reduced-motion: reduce) {
   .chat-panel, .chat-toggle, .chat-send, .chat-input, .chatbot-product-card {
     transition: none !important;
+    animation: none !important;
+  }
+  .typing-avatar {
     animation: none !important;
   }
 }

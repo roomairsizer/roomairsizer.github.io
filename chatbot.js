@@ -31,7 +31,7 @@
     bindEvents();
     
     if (history.length === 0) {
-      addMessage('bot', "Hi — I'm here to help you figure out the right air purifier for your space. Ask me anything about indoor air quality, sizing, or specific concerns like allergies or smoke.");
+      addMessage('bot', "Greetings! I'm Professor BBA, your air quality specialist. I've spent decades studying indoor air — pollen, smoke, dust, allergens, the works. Tell me your room size and your concern, and I'll size the right purifier for your space. Or ask me anything about CADR, HEPA filters, or specific air quality issues. What can I help you investigate?");
     } else {
       renderHistory();
     }
@@ -42,13 +42,15 @@
     chatContainer.id = 'chat-container';
     chatContainer.innerHTML = `
       <button class="chat-toggle" aria-label="Open Chat Assistant" aria-expanded="false">
-        ${SVG_ICON}
       </button>
       <div class="chat-panel" role="dialog" aria-label="Chat Assistant">
         <header class="chat-header">
-          <div class="chat-header__title">
-            ${SVG_ICON}
-            <span>Air Quality Assistant</span>
+          <div class="chat-header__title" style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background-image: url('images/mascot-header.png'); background-size: cover; background-position: center top; background-repeat: no-repeat; border: 2px solid var(--chat-primary); flex-shrink: 0;"></div>
+            <div style="display: flex; flex-direction: column; line-height: 1.2;">
+              <span style="font-size: 1.1rem; font-weight: 600;">Professor BBA</span>
+              <span style="font-size: 0.8rem; color: var(--chat-text-dim); font-family: 'Inter', sans-serif;">Air Quality Specialist</span>
+            </div>
           </div>
           <button class="chat-close" aria-label="Close Chat">
             ${CLOSE_ICON}
@@ -118,8 +120,9 @@
     typingIndicator = document.createElement('div');
     typingIndicator.className = 'chat-msg chat-msg--bot chat-msg--typing';
     typingIndicator.innerHTML = `
-      <div class="chat-msg__avatar">${SVG_ICON}</div>
+      <div class="chat-msg__avatar typing-avatar"></div>
       <div class="chat-msg__text">
+        <span style="color: var(--chat-text-dim); font-size: 0.9rem; font-style: italic; margin-right: 6px;">Professor BBA is analyzing</span>
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
       </div>
     `;
@@ -149,9 +152,19 @@
     const div = document.createElement('div');
     div.className = `chat-msg chat-msg--${msg.sender}`;
     
-    let avatar = '';
+    let showAvatar = false;
     if (msg.sender === 'bot') {
-      avatar = `<div class="chat-msg__avatar">${SVG_ICON}</div>`;
+      const msgIndex = history.indexOf(msg);
+      if (msgIndex === 0) {
+        showAvatar = true;
+      } else if (msgIndex > 0) {
+        showAvatar = history[msgIndex - 1].sender !== 'bot';
+      }
+    }
+
+    let avatar = '';
+    if (msg.sender === 'bot' && showAvatar) {
+      avatar = `<div class="chat-msg__avatar bot-avatar"></div>`;
     }
 
     let textHtml = msg.text;
